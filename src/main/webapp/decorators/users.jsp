@@ -34,7 +34,7 @@
 			<td colspan="2"><%@ include file="/common/users/header.jsp"%>
 			</td>
 		</tr>
-		<tr style ="margin-bottom:100px">
+		<tr style ="padding-bottom:100px">
 			<td><decorator:body></decorator:body></td>
 		</tr>
 		<tr>

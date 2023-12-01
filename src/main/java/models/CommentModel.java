@@ -1,34 +1,41 @@
 package models;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
+
+import service.IUserService;
+import serviceImp.UserServiceImp;
 
 public class CommentModel {
 	int CommentID;
 	int UserID;
 	int PostID;
 	String Content;
-	ZonedDateTime CreateAt;
-	ZonedDateTime UpdateAt;
-	public CommentModel(int commentID, int userID, int postID, String content, ZonedDateTime dateTimeCreate) {
+	LocalDateTime CreatedAt;
+	LocalDateTime UpdatedAt;
+	
+	UserModel User;
+	
+	public CommentModel(int commentID, int userID, int postID, String content, LocalDateTime dateTimeCreate) {
 		super();
 		CommentID = commentID;
 		UserID = userID;
 		PostID = postID;
 		Content = content;
-		CreateAt = dateTimeCreate;
+		CreatedAt = dateTimeCreate;
+		IUserService userservice = new UserServiceImp();
+		User = userservice.getOneByID(userID);
 	}
-	public CommentModel(int commentID, int userID, int postID, String content, ZonedDateTime createAt,
-			ZonedDateTime updateAt) {
+	public CommentModel(int commentID, int userID, int postID, String content, LocalDateTime createAt,
+			LocalDateTime updateAt) {
 		super();
 		CommentID = commentID;
 		UserID = userID;
 		PostID = postID;
 		Content = content;
-		CreateAt = createAt;
-		UpdateAt = updateAt;
-	}
-	public CommentModel() {
-		super();
+		CreatedAt = createAt;
+		UpdatedAt = updateAt;
+		IUserService userservice = new UserServiceImp();
+		User = userservice.getOneByID(userID);
 	}
 	public int getCommentID() {
 		return CommentID;
@@ -41,6 +48,8 @@ public class CommentModel {
 	}
 	public void setUserID(int userID) {
 		UserID = userID;
+		IUserService userservice = new UserServiceImp();
+		User = userservice.getOneByID(userID);
 	}
 	public int getPostID() {
 		return PostID;
@@ -54,16 +63,25 @@ public class CommentModel {
 	public void setContent(String content) {
 		Content = content;
 	}
-	public ZonedDateTime getCreateDateTime() {
-		return CreateAt;
+	public LocalDateTime getCreatedAt() {
+		return CreatedAt;
 	}
-	public void setCreateDateTime (ZonedDateTime createAt) {
-		CreateAt = createAt;
+	public void setCreatedAt(LocalDateTime createdAt) {
+		CreatedAt = createdAt;
 	}
-	public ZonedDateTime getUpdateDateTime() {
-		return UpdateAt;
+	public LocalDateTime getUpdatedAt() {
+		return UpdatedAt;
 	}
-	public void setUpdateDateTime(ZonedDateTime updateAt) {
-		UpdateAt = updateAt;
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		UpdatedAt = updatedAt;
+	}
+	public UserModel getUser() {
+		return User;
+	}
+	public void setUser(UserModel user) {
+		User = user;
+	}
+	public CommentModel() {
+		super();
 	}
 }

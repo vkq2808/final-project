@@ -3,12 +3,13 @@ package daoImp;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import connection.DBConnection;
 import dao.IPostDao;
-import models.HomePostUserModel;
 import models.PostModel;
 import models.UserModel;
 
@@ -21,23 +22,9 @@ public class PostDaoImp implements IPostDao {
 	@Override
 	public void insert(int uid, String content, String imageLink) throws Exception {
 		
-		String sql = "select top (1) from Post";
 		try {
 			conn = new DBConnection().getConnection();
-			ps = conn.prepareStatement(sql);
-			rs = ps.executeQuery();
-			
-			int nextPostID;
-			int curPostID = rs.getInt("PostID"); 
-			
-			if( curPostID == 0) {
-				nextPostID = 2808;
-			}
-			else {
-				nextPostID = curPostID + 1;
-			}
-			
-			sql = String.format("insert into Post value (%s,\"%s\",%s\",%s\")",nextPostID,uid,content,imageLink);
+			String sql = String.format("insert into Post(UserID,Content,CreatedAt,UpdatedAt) values (%s,\"%s\",%s\",%s\")",uid,content,LocalDateTime.now().toString(),"NULL");
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			conn.close();
@@ -46,44 +33,54 @@ public class PostDaoImp implements IPostDao {
 			if (!conn.isClosed()) {
 				conn.close();
 			}
-			System.out.println(e.getMessage());
+			System.out.println(e);
 		}
 	}
 
 	@Override
-	public List<HomePostUserModel> getAll() {
-		String sql = "select * from Post, Users where Post.UserID = Users.UserID";
+	public List<PostModel> getAll() {
+			try {
+				conn = new DBConnection().getConnection();
+				ps = conn.prepareStatement("SELECT * FROM Post");
+				rs = ps.executeQuery();
+				List<PostModel> list = new ArrayList<PostModel>();
+				
+				while (rs.next()) {
+					PostModel post = new PostModel(
+							rs.getInt("PostID"),
+							rs.getInt("UserID"),
+							rs.getString("Content"),	
+							LocalDateTime.parse(rs.getString("CreatedAt").subSequence(0, 19),DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+							);
+					list.add(post);
+				}
+				conn.close();
+				return list;
+			}
+			catch (Exception e) {
+				System.out.println("Lỗi PostService.getAll(): \n\t"+e.getMessage());
+				
+			}
+		return null;
+	}
+
+	@Override
+	public List<String> findImageLink(int postID) {
+		List<String> list = new ArrayList<String>();
 		try {
 			conn = new DBConnection().getConnection();
-			ps = conn.prepareStatement(sql);
+			ps = conn.prepareStatement("SELECT * FROM PostImage WHERE PostID = ?");
+			ps.setInt(1, postID);
 			rs = ps.executeQuery();
-
-			List<HomePostUserModel> list = new ArrayList<HomePostUserModel>();
-			while (rs.next()) {
-				
-				HomePostUserModel PostUser = new HomePostUserModel();
-				PostModel post = PostUser.getPost();
-				UserModel user = PostUser.getUser();
-				
-				post.setPostID(rs.getInt("PostID"));
-				post.setContent(rs.getString("Content"));
-				post.setImageLink(rs.getString("Image"));
-				
-				user.setUserName(rs.getString("UserName"));
-				
-				PostUser.setPost(post);
-				PostUser.setUser(user);
-				
-				list.add(PostUser);
-//				System.out.println(user.getUserName());
+			
+			while(rs.next()) {
+				list.add(rs.getString("ImageLink"));
 			}
-			conn.close();
-			return list;
 		}
 		catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("Lỗi PostService.findImageLink(): \n\t"+e.getMessage());
 		}
-		return null;
+		return list;
 	}
 
 }
