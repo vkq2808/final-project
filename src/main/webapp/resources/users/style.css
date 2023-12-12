@@ -1,6 +1,11 @@
-
+.header-block{
+	height:50px;
+}
 img.post-images-2{
 	width: 50vw; 
     height: auto; 
     display: block;
+}
+.form-control.mr-sm-2{
+	width: 50%;
 }

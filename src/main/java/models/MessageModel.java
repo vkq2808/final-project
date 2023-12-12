@@ -1,52 +1,76 @@
 package models;
 
-import java.time.ZonedDateTime;
+import daoImp.MessageFolderDaoImp;
+import daoImp.UserDaoImp;
 
 public class MessageModel {
-	int MessID;
+	int MessageID;
 	int SenderID;
-	int ReceiverID;
+	int MessageFolderID;
 	String Content;
-	ZonedDateTime SentDateTime;
-	public MessageModel(int messID, int senderID, int receiverID, String content, ZonedDateTime sentDateTime) {
-		super();
-		MessID = messID;
-		SenderID = senderID;
-		ReceiverID = receiverID;
-		Content = content;
-		SentDateTime = sentDateTime;
+	String CreatedAt;
+
+	UserModel Sender;
+	MessageFolderModel MessageFolder;
+
+	public MessageFolderModel getMessageFolder() {
+		return MessageFolder;
 	}
+
+	public void setMessageFolder(MessageFolderModel messageFolder) {
+		MessageFolder = messageFolder;
+	}
+
 	public MessageModel() {
 		super();
 	}
-	public int getMessID() {
-		return MessID;
+
+	public int getMessageID() {
+		return MessageID;
 	}
-	public void setMessID(int messID) {
-		MessID = messID;
+
+	public void setMessageID(int messageID) {
+		MessageID = messageID;
 	}
+
 	public int getSenderID() {
 		return SenderID;
 	}
+
 	public void setSenderID(int senderID) {
 		SenderID = senderID;
+		Sender = new UserDaoImp().getOneByID(senderID);
 	}
-	public int getReceiverID() {
-		return ReceiverID;
+
+	public int getMessageFolderID() {
+		return MessageFolderID;
 	}
-	public void setReceiverID(int receiverID) {
-		ReceiverID = receiverID;
+
+	public void setMessageFolderID(int messageFolderID) {
+		MessageFolderID = messageFolderID;
 	}
+
 	public String getContent() {
 		return Content;
 	}
+
 	public void setContent(String content) {
 		Content = content;
 	}
-	public ZonedDateTime getSentDateTime() {
-		return SentDateTime;
+
+	public String getCreatedAt() {
+		return CreatedAt;
 	}
-	public void setSentDateTime(ZonedDateTime sentDateTime) {
-		SentDateTime = sentDateTime;
+
+	public void setCreatedAt(String createdAt) {
+		CreatedAt = createdAt;
+	}
+
+	public UserModel getSender() {
+		return Sender;
+	}
+
+	public void setSender(UserModel sender) {
+		Sender = sender;
 	}
 }

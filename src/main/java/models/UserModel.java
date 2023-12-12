@@ -1,24 +1,21 @@
 package models;
 
-import java.util.Date;
-
 public class UserModel {
 	int UserID;
 	String UserName;
 	String Email;
-	Date BirthDate;
 	String NumPhone;
 	String AvatarLink;
+	String Password;
+	boolean isAdmin;
 	
 	public UserModel() {
 		super();
 	}
-	public UserModel(int userID, String userName, String email, Date birthDate, String numPhone, String avatarLink) {
+	public UserModel(String userName, String numPhone, String email, String avatarLink) {
 		super();
-		UserID = userID;
 		UserName = userName;
 		Email = email;
-		BirthDate = birthDate;
 		NumPhone = numPhone;
 		AvatarLink = avatarLink;
 	}
@@ -40,12 +37,6 @@ public class UserModel {
 	public void setEmail(String email) {
 		Email = email;
 	}
-	public Date getBirthDate() {
-		return BirthDate;
-	}
-	public void setBirthDate(Date birthDate) {
-		BirthDate = birthDate;
-	}
 	public String getNumPhone() {
 		return NumPhone;
 	}
@@ -53,9 +44,23 @@ public class UserModel {
 		NumPhone = numPhone;
 	}
 	public String getAvatarLink() {
+		if (AvatarLink == null)
+			return "https://static.vecteezy.com/system/resources/previews/009/734/564/original/default-avatar-profile-icon-of-social-media-user-vector.jpg";
 		return AvatarLink;
 	}
 	public void setAvatarLink(String avatarLink) {
 		AvatarLink = avatarLink;
+	}
+	public String getPassword() {
+		return Password;
+	}
+	public void setPassword(String password) {
+		Password = password;
+	}
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 }

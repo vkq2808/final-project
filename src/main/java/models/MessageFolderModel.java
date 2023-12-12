@@ -1,35 +1,60 @@
 package models;
 
+import daoImp.MessageDaoImp;
+
 public class MessageFolderModel {
-	int MessFoID;
-	String MessFoName;
-	String MessFoImageLink;
-	public MessageFolderModel(int messFoID, String messFoName, String messFoImageLink) {
-		super();
-		MessFoID = messFoID;
-		MessFoName = messFoName;
-		MessFoImageLink = messFoImageLink;
-	}
+	int MessageFolderID;
+	String MessageFolderName;
+	String MessageFolderAvatarLink;
+	int LatestMessageID;
+
+	MessageModel LatestMessage;
+
 	public MessageFolderModel() {
 		super();
 	}
-	public int getMessFoID() {
-		return MessFoID;
+
+	public int getMessageFolderID() {
+		return MessageFolderID;
 	}
-	public void setMessFoID(int messFoID) {
-		MessFoID = messFoID;
+
+	public void setMessageFolderID(int messageFolderID) {
+		MessageFolderID = messageFolderID;
 	}
-	public String getMessFoName() {
-		return MessFoName;
+
+	public String getMessageFolderName() {
+		return MessageFolderName;
 	}
-	public void setMessFoName(String messFoName) {
-		MessFoName = messFoName;
+
+	public void setMessageFolderName(String messageFolderName) {
+		MessageFolderName = messageFolderName;
 	}
-	public String getMessFoImageLink() {
-		return MessFoImageLink;
+
+	public String getMessageFolderAvatarLink() {
+		return MessageFolderAvatarLink;
 	}
-	public void setMessFoImageLink(String messFoImageLink) {
-		MessFoImageLink = messFoImageLink;
+
+	public void setMessageFolderAvatarLink(String messageFolderAvatarLink) {
+		MessageFolderAvatarLink = messageFolderAvatarLink;
 	}
-	
+
+	public int getLatestMessageID() {
+		return LatestMessageID;
+	}
+
+	public void setLatestMessageID(int latestMessageID) {
+		if (LatestMessageID != latestMessageID) {
+			LatestMessage = new MessageDaoImp().getOneByID(latestMessageID);
+			LatestMessageID = latestMessageID;
+		}
+	}
+
+	public MessageModel getLatestMessage() {
+		return LatestMessage;
+	}
+
+	public void setLatestMessage(MessageModel latestMessage) {
+		LatestMessage = latestMessage;
+	}
+
 }

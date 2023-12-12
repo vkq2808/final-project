@@ -1,0 +1,23 @@
+.show-control{
+	display: flex;
+	flex-direction: row;
+}
+
+.d-f.jc-c.al-c {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.mt-20 {
+	margin-top: 20px;
+}
+
+.r0-l0 {
+	left: 0;
+	right: 0;
+}
+.l0-r0 {
+	left: 0;
+	right: 0;
+}
