@@ -1,3 +1,3 @@
 <% 
-   response.sendRedirect("trang-chu");
+   response.sendRedirect("home");
 %>

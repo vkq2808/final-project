@@ -1,11 +1,23 @@
 package service;
 
+import java.util.List;
+
 import models.UserModel;
 
 public interface IUserService {
-//	void create ();
-//	void update ();
-//	void delete ();
+UserModel create(UserModel user);
+	
+	UserModel update(UserModel user);
+	
+	void delete(int userID);
+	
 	UserModel getOneByID(int userID);
-//	getAll();
+	
+	List<UserModel> getAll();
+
+	boolean regist(String username, String password);
+
+	UserModel login(String username, String password);
+
+	List<UserModel> getAllFriend(int senderID);
 }

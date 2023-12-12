@@ -3,22 +3,30 @@ package models;
 import java.time.LocalDateTime;
 
 public class LikeModel {
+	int LikeID;
 	int PostID;
 	int UserID;
-	LocalDateTime CreatedAt;
-	public LikeModel(int postID, int userID, LocalDateTime createdAt) {
+	String CreatedAt;
+	public LikeModel(int postID, int userID, String createdAt) {
 		super();
 		PostID = postID;
 		UserID = userID;
 		CreatedAt = createdAt;
 	}
+	
+	public LikeModel(int postID, int userID) {
+		super();
+		PostID = postID;
+		UserID = userID;
+	}
+
 	public LikeModel() {
 		super();
 	}
-	public LocalDateTime getCreatedAt() {
+	public String getCreatedAt() {
 		return CreatedAt;
 	}
-	public void setCreatedAt(LocalDateTime createdAt) {
+	public void setCreatedAt(String createdAt) {
 		CreatedAt = createdAt;
 	}
 	public int getPostID() {
@@ -33,5 +41,12 @@ public class LikeModel {
 	public void setUserID(int userID) {
 		UserID = userID;
 	}
-	
+
+	public int getLikeID() {
+		return LikeID;
+	}
+
+	public void setLikeID(int likeID) {
+		LikeID = likeID;
+	}
 }

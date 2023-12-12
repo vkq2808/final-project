@@ -1,9 +1,13 @@
 package service;
 
+import java.util.List;
+
+import models.ConversationModel;
+
 public interface IConversationService {
-//	void create ();
-//	void update ();
-//	void delete ();
-//	getOneByID();
-//	getAll();
+	ConversationModel insert(ConversationModel conver);
+	ConversationModel update(ConversationModel conver);
+	void delete (int ConversationID);
+	ConversationModel getOneByID(int ConversationID);
+	List<ConversationModel> getAll();
 }

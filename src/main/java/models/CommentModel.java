@@ -10,23 +10,23 @@ public class CommentModel {
 	int UserID;
 	int PostID;
 	String Content;
-	LocalDateTime CreatedAt;
-	LocalDateTime UpdatedAt;
+	String CreatedAt;
+	String UpdatedAt;
 	
 	UserModel User;
 	
-	public CommentModel(int commentID, int userID, int postID, String content, LocalDateTime dateTimeCreate) {
+	public CommentModel(int commentID, int userID, int postID, String content, String createdAt) {
 		super();
 		CommentID = commentID;
 		UserID = userID;
 		PostID = postID;
 		Content = content;
-		CreatedAt = dateTimeCreate;
+		CreatedAt = createdAt;
 		IUserService userservice = new UserServiceImp();
 		User = userservice.getOneByID(userID);
 	}
-	public CommentModel(int commentID, int userID, int postID, String content, LocalDateTime createAt,
-			LocalDateTime updateAt) {
+	public CommentModel(int commentID, int userID, int postID, String content, String createAt,
+			String updateAt) {
 		super();
 		CommentID = commentID;
 		UserID = userID;
@@ -63,16 +63,17 @@ public class CommentModel {
 	public void setContent(String content) {
 		Content = content;
 	}
-	public LocalDateTime getCreatedAt() {
+	
+	public String getCreatedAt() {
 		return CreatedAt;
 	}
-	public void setCreatedAt(LocalDateTime createdAt) {
+	public void setCreatedAt(String createdAt) {
 		CreatedAt = createdAt;
 	}
-	public LocalDateTime getUpdatedAt() {
+	public String getUpdatedAt() {
 		return UpdatedAt;
 	}
-	public void setUpdatedAt(LocalDateTime updatedAt) {
+	public void setUpdatedAt(String updatedAt) {
 		UpdatedAt = updatedAt;
 	}
 	public UserModel getUser() {

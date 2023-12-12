@@ -13,10 +13,20 @@
 		<pattern>/*</pattern>
 
 	</decorator>
-	
+	<decorator name="chat" page="chat.jsp">
+
+		<pattern>/chat*</pattern>
+
+	</decorator>
+	<decorator name="login" page="login.jsp">
+		<pattern>/sign*</pattern>
+	</decorator>
+	<decorator name="profile" page="profile.jsp">
+		<pattern>/profile*</pattern>
+	</decorator>
 	<excludes>
 
-		<pattern>/api*</pattern>
+		<pattern>/api/*</pattern>
 
 	</excludes>
 

@@ -12,7 +12,7 @@ public class DBConnection {
 	private final String password = "123456";
 	
 	public Connection getConnection() throws Exception {
-		String url = "jdbc:sqlserver://" + serverName + "\\" + instance + ";databaseName=" + dbName;
+		String url = "jdbc:sqlserver://" + serverName + "\\" + instance + ";databaseName=" + dbName+"?useUnicode=true&characterEncoding=UTF-8";
 		if (instance == null || instance.trim().isEmpty())
 		url = "jdbc:sqlserver://"+serverName+ ";databaseName="+dbName;
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");

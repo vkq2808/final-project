@@ -9,7 +9,7 @@ public class PostModel {
 	String Content;
 	List<String> ImageLink;
 	boolean hasImage;
-	LocalDateTime PostDate;
+	String PostDate;
 
 	UserModel user = null;
 	List<LikeModel> listLikes = null;
@@ -17,7 +17,7 @@ public class PostModel {
 	List<CommentModel> listComments = null;
 	int numComments;
 
-	public PostModel(int postID, int userID, String content, LocalDateTime postDate) {
+	public PostModel(int postID, int userID, String content, String postDate) {
 		super();
 		PostID = postID;
 		UserID = userID;
@@ -65,11 +65,11 @@ public class PostModel {
 		ImageLink.add(link);
 	}
 
-	public LocalDateTime getPostDate() {
+	public String getPostDate() {
 		return PostDate;
 	}
 
-	public void setPostDate(LocalDateTime postDate) {
+	public void setPostDate(String postDate) {
 		PostDate = postDate;
 	}
 
@@ -96,7 +96,8 @@ public class PostModel {
 
 	public void setListComments(List<CommentModel> listComments) {
 		this.listComments = listComments;
-		this.numComments = listComments.size();
+		if(listComments != null)
+			this.numComments = listComments.size();
 	}
 
 	public boolean getHasImage() {
